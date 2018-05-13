@@ -108,13 +108,7 @@ public class CommandShellRunner implements Runner {
                 }
                 ShellPrint.printResult(result);
             }
-        } catch (NoSuchMethodException e) {
-            ShellPrint.printMsg(e.getMessage());
-        } catch (IllegalAccessException e) {
-            ShellPrint.printMsg(e.getMessage());
-        } catch (IllegalArgumentException e) {
-            ShellPrint.printMsg(e.getMessage());
-        } catch (InvocationTargetException e) {
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalArgumentException | IllegalAccessException e) {
             ShellPrint.printMsg(e.getMessage());
         } finally {
             //打印数据
