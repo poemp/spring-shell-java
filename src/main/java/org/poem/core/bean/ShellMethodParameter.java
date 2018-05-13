@@ -13,17 +13,27 @@ public class ShellMethodParameter {
      */
     private final Class clazz;
 
+    /**
+     * 描述
+     */
+    private final String detail;
 
-    public ShellMethodParameter(String name,Class clazz) {
-        this.clazz = clazz;
+
+    public ShellMethodParameter(String name, Class clazz, String detail) {
         this.name = name;
+        this.clazz = clazz;
+        this.detail = detail;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Class getClazz() {
         return clazz;
     }
 
-    public String getName() {
-        return name;
+    public String getDetail() {
+        return detail;
     }
 }

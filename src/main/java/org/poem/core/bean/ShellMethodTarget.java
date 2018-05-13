@@ -16,6 +16,7 @@ public class ShellMethodTarget {
     private final Object bean;
 
     /**
+     * 方法的名字
      * name
      */
     private final String name;

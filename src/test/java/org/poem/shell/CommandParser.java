@@ -6,6 +6,7 @@ public class CommandParser {
 
     private Options searchOpts = new Options();
     private CommandLine cl = null;
+
     /**
      * The main method.
      *
@@ -13,11 +14,12 @@ public class CommandParser {
      */
     public static void main(String[] args) {
         CommandParser processer = new CommandParser();
-        processer.run(new String[]{
+        processer.run(new String[]{"select",
                 "-h"
         });
         processer.validte();
     }
+
     /**
      * Instantiates a new search command line processer.
      */
@@ -27,6 +29,7 @@ public class CommandParser {
                 .hasArgs().withArgName("START_DIRECTORY").create('d');
         searchOpts.addOption(optStartDir);
     }
+
     /**
      * Set rule for command line parser, run parsing process
      *
@@ -40,11 +43,19 @@ public class CommandParser {
         setSize();
         setSizeRange();
         setHelp();
+        test();
         runProcess(searchOpts, args, new PosixParser());
     }
-    /**
-     * Sets the date.
-     */
+
+    public void test(){
+        Option o = OptionBuilder.withArgName("args")
+                .withLongOpt("files")
+                .hasArgs(2)
+                .withValueSeparator(',')
+                .withDescription("file names")
+                .create("f");
+        searchOpts.addOption(o);
+    }
     public void setDate() {
         String desc = "Specify the file create date time";
         Option optDate = OptionBuilder.withDescription(desc).isRequired(false)
@@ -52,9 +63,7 @@ public class CommandParser {
                 .create('D');
         searchOpts.addOption(optDate);
     }
-    /**
-     * Sets the date range.
-     */
+
     public void setDateRange() {
         StringBuffer desc = new StringBuffer(
                 "Specify acceptance date range for cutoff date specify by option -d");
@@ -63,12 +72,10 @@ public class CommandParser {
         Option optDateRange = null;
         optDateRange = OptionBuilder.withDescription(desc.toString())
                 .isRequired(false).hasArg().withArgName("DATE_RANGE")
- .create('r');
+                .create('r');
         searchOpts.addOption(optDateRange);
     }
-    /**
-     * Sets the prefix.
-     */
+
     public void setPrefix() {
         String desc = "Specify the prefix of file, multiple prefixes can be split by comma";
         Option optPrefix = OptionBuilder.withDescription(desc)
@@ -76,9 +83,7 @@ public class CommandParser {
                 .create('p');
         searchOpts.addOption(optPrefix);
     }
-    /**
-     * Sets the suffix.
-     */
+
     public void setSuffix() {
         String desc = "Specify the suffix of file, multiple suffixes can be split by comma";
         Option optSuffix = OptionBuilder.withDescription(desc)
@@ -86,6 +91,7 @@ public class CommandParser {
                 .create('s');
         searchOpts.addOption(optSuffix);
     }
+
     /**
      * Sets the size.
      */
@@ -96,9 +102,7 @@ public class CommandParser {
                         "file-size").create('S');
         searchOpts.addOption(optSize);
     }
-    /**
-     * Sets the size range.
-     */
+
     public void setSizeRange() {
         StringBuffer desc = new StringBuffer(
                 "Specify acceptance size threshold for file specify by option -S");
@@ -110,24 +114,14 @@ public class CommandParser {
                 .create('l');
         searchOpts.addOption(optDateRange);
     }
-    /**
-     * Sets the help.
-     */
+
     public void setHelp() {
         String desc = "Print help message and all options information";
         Option optHelp = OptionBuilder.withDescription(desc).isRequired(false)
                 .create('h');
         searchOpts.addOption(optHelp);
     }
-    /**
-     * Run process.
-     2018/5/13 简单而功能强大的commons CLI
-     http://www.360doc.com/content/17/0505/15/35874779_651330374.shtml 3/4
-     *
-     * @param opts the opts
-     * @param args the args
-     * @param parser the parser
-     */
+
     public void runProcess(Options opts, String[] args, CommandLineParser parser) {
         try {
             cl = process(searchOpts, args, parser);
@@ -141,7 +135,7 @@ public class CommandParser {
         Option opt = null;
         for (int i = 0; i < allOpts.length; i++) {
             opt = allOpts[i];
-            if("h".equals(opt.getOpt())) {
+            if ("h".equals(opt.getOpt())) {
                 printHelp(opts);
                 System.exit(0);
             }
@@ -149,19 +143,12 @@ public class CommandParser {
                     + ", and value = " + getOptValues(opt.getOpt(), ","));
         }
     }
-    /*
-     * (non-Javadoc)
-     *
-     * @see example.io.CommandLineProcesser#process(org.apache.commons.cli.Options,
-     * java.lang.String[], org.apache.commons.cli.CommandLineParser)
-     */
+
     public CommandLine process(Options options, String[] args,
                                CommandLineParser parser) throws ParseException {
         return parser.parse(options, args);
     }
-    /**
-     * Validte required option and optional options
-     */
+
     private void validte() {
 
         // Validate directory option
@@ -174,20 +161,20 @@ public class CommandParser {
         String date = (getOptValue("D") == null) ? getOptValue("date")
                 : getOptValue("D");
         String dateRange = getOptValue("r");
-        if(date != null && (dateRange == null)) {
+        if (date != null && (dateRange == null)) {
             System.out.println("Missing option -D/--date, exit immediately");
             System.exit(-1);
-        }else if (date == null && (dateRange != null)) {
+        } else if (date == null && (dateRange != null)) {
             System.out.println("Date not specified, ignore option -r");
         }
         // Validate size option
         String size = (getOptValue("S") == null) ? getOptValue("file-size")
                 : getOptValue("S");
         String sizeRange = getOptValue("l");
-        if(size != null && (sizeRange == null)) {
+        if (size != null && (sizeRange == null)) {
             System.out.println("Missing option -S/--file-size, exit immediately");
             System.exit(-1);
-        }else if (size == null && (sizeRange != null)) {
+        } else if (size == null && (sizeRange != null)) {
             System.out.println("File size not specified, ignore option -l");
         }
     }
@@ -203,7 +190,7 @@ public class CommandParser {
     }
 
     public String[] getOptValues(String opt) {
-        return (cl != null) ? cl.getOptionValues(opt) : new String[] { "" };
+        return (cl != null) ? cl.getOptionValues(opt) : new String[]{""};
     }
 
     public String getOptValues(String opt, String valueSeparater) {
