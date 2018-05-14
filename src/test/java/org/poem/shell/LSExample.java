@@ -4,7 +4,7 @@ import org.apache.commons.cli.*;
 
 public class LSExample {
     public static void main(String[] args) {
-        String[] arg = {"help","-help", "sfjk", "-classname", "classname"};
+        String[] arg = {"-help", "sfjk"};
         testOption(arg);
     }
     @SuppressWarnings({ "deprecation", "static-access" })

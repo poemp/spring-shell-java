@@ -3,18 +3,20 @@ package org.poem.config;
 import org.apache.commons.cli.*;
 import org.poem.core.bean.ShellMethodParameter;
 import org.poem.core.bean.ShellMethodTarget;
+import org.poem.core.print.ShellPrint;
 import org.poem.tools.utils.collection.CollectionUtils;
 import org.poem.tools.utils.collection.Lists;
 import org.poem.tools.utils.string.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
 public class ShellCommandParse {
 
-    private List<ShellMethodTarget> commands;
+    private Collection<ShellMethodTarget> commands;
 
     private final Options searchOpts = new Options();
 
@@ -30,7 +32,9 @@ public class ShellCommandParse {
 
     private int parameterCount = 0;
 
-    public ShellCommandParse(List<ShellMethodTarget> commands) {
+    private String groupName;
+
+    public ShellCommandParse(Collection<ShellMethodTarget> commands) {
         this.commands = CollectionUtils.isNotEmpty(commands) ? commands : Lists.empty();
     }
 
@@ -46,41 +50,45 @@ public class ShellCommandParse {
 
 
     @SuppressWarnings({"deprecation", "static-access"})
-    private ShellCommandParse createParse() {
+    private ShellCommandParse createParse(String command) {
         if (!this.commands.isEmpty()) {
             //当前的类下的所有的方法
             for (ShellMethodTarget shellMethodTarget : this.commands) {
-
+                Option option;
+               Options s =  new Options();
                 for (ShellMethodParameter shellMethodParameter : shellMethodTarget.getMethodParameterMap().values()) {
                     String shortName = this.shortName(shellMethodParameter.getName());
+                    if (command.equals(shellMethodTarget.getName())) {
+                        //当前调用的方法
+                        currentMethod = shellMethodTarget.getMethod();
+                        parameterCount += 1;
+                        longArgName.add(shellMethodParameter.getName());
+                        shortArgName.add(shortName);
+                        parameterTypes.add(shellMethodParameter.getClazz());
 
-                    //当前调用的方法
-                    currentMethod = shellMethodTarget.getMethod();
-                    parameterCount += 1;
-                    longArgName.add(shellMethodParameter.getName());
-                    shortArgName.add(shortName);
-                    parameterTypes.add(shellMethodParameter.getClazz());
-
+                    }
                     String detail = shellMethodParameter.getDetail();
-                    Option option = OptionBuilder
+                    option = OptionBuilder
                             .withLongOpt(shellMethodParameter.getName())
                             .withDescription(detail)
                             .withArgName(shellMethodParameter.getName())
-                            .hasArg()
-                            .create(shortName);
-                    searchOpts.addOption(option);
+                            .hasArg().create(shortName);
+                    if("".equals(command)){
+                        s.addOption(option);
+                    }else{
+                        searchOpts.addOption(option);
+                    }
+                }
+                if("".equals(command)){
+                    ShellPrint.printHelp(groupName,shellMethodTarget.getName(),s);
                 }
             }
         }
         return this;
     }
 
-    /**
-     * 获取参数类型
-     * @return
-     */
-    public Class[] getParameterTypes(){
-        return parameterTypes.toArray(new Class[parameterTypes.size()]);
+    public Method getCurrentMethod(){
+        return  this.currentMethod;
     }
     /**
      * 获取值
@@ -92,8 +100,8 @@ public class ShellCommandParse {
     public Object[] getParameterValue(String commandLine) throws ParseException {
         //必须先执行，再执行下面的数据
         List<String> wordsForArgs = wordsForArguments(getGroupName(commandLine), wordsForArguments(getCommand(commandLine), sanitizeInput(commandLine)));
-        Options options = this.createParse().getSearchOpts();
-        CommandLine line = parser.parse(options , wordsForArgs.toArray(new String[wordsForArgs.size()]));
+        Options options = this.createParse(getCommand(commandLine)).getSearchOpts();
+        CommandLine line = parser.parse(options, wordsForArgs.toArray(new String[wordsForArgs.size()]));
         Object[] objects = new Object[this.parameterCount];
         for (int i = 0, length = longArgName.size(); i < length; i++) {
             Object o = objects[i];
@@ -124,6 +132,9 @@ public class ShellCommandParse {
      */
     private List<String> wordsForArguments(String command, List<String> words) {
         int wordsUsedForCommandKey = command.split("\\s+").length;
+        if(wordsUsedForCommandKey > words.size()){
+            return Lists.empty();
+        }
         List<String> args = words.subList(wordsUsedForCommandKey, words.size());
         int last = args.size() - 1;
         if (last >= 0 && "".equals(args.get(last))) {
@@ -180,5 +191,10 @@ public class ShellCommandParse {
             }
         }
         return "";
+    }
+
+    public void printHelp(String commandLine){
+        this.groupName = commandLine;
+        this.createParse(getCommand(commandLine));
     }
 }

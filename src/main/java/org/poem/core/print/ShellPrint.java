@@ -20,6 +20,18 @@ public class ShellPrint {
         formatter.printHelp(command, options);
     }
 
+    /**
+     * 打印帮助信息
+     *
+     * @param command
+     * @param options
+     */
+    public static void printHelp(String group,String command, Options options) {
+        HelpFormatter formatter = new HelpFormatter();
+        printMsg("\n"+ group);
+        formatter.printHelp(command, options);
+    }
+
     public static void printUnrecognizOption(String group, String command, Options options) {
         HelpFormatter formatter = new HelpFormatter();
         printMsg(group + "\n");

@@ -8,6 +8,7 @@ import org.poem.config.ShellCommandParse;
 import org.poem.config.ShellMethodTargetRegistrar;
 import org.poem.core.bean.ShellMethodTarget;
 import org.poem.core.enums.ActionEnums;
+import org.poem.core.exception.ShellCommandException;
 import org.poem.core.lang.SObject;
 import org.poem.core.print.ShellPrint;
 import org.poem.tools.utils.collection.CollectionUtils;
@@ -58,36 +59,28 @@ public class CommandShellRunner implements Runner {
             pw.flush();
             String commandLine = sc.nextLine();  //读取字符串型输入
             if (StringUtils.isNotBlank(commandLine)) {
-                ShellCommandParse parse = new ShellCommandParse(commands.get(getGroupName(commandLine)));
-                try {
-                    Object[] args = parse.getParameterValue(commandLine);
-                    String beanName = getGroupName(commandLine);
-                    String method = getCommand(commandLine);
-                    executor(beanName,method,Arrays.asList(args),parse.getParameterTypes());
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                if(ActionEnums.HELP.getAction().equals(commandLine)){
+                    //帮助
+                    for (String s : commands.keySet()) {
+                        ShellCommandParse parse = new ShellCommandParse(commands.get(s));
+                        parse.printHelp(s);
+                    }
+                }else{
+                    try {
+                        ShellCommandParse parse = new ShellCommandParse(commands.get(getGroupName(commandLine)));
+                        Object[] args = parse.getParameterValue(commandLine);
+                        String beanName = getGroupName(commandLine);
+                        executor(beanName,parse.getCurrentMethod(),args);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    } catch (ShellCommandException e) {
+                        e.printStackTrace();
+                    }
                 }
             } else {
                 System.err.println("\n");
             }
         }
-    }
-
-
-    /**
-     * 获取参数
-     *
-     * @param commandLine
-     * @return
-     */
-    private String getCommand(String commandLine) {
-        if (StringUtils.isNoneBlank(commandLine)) {
-            List<String> cpmmands = Arrays.asList(commandLine.split("\\s+"));
-            if (cpmmands.size() >= 2) {
-                return cpmmands.get(1);
-            }
-        }
-        return "";
     }
 
     /**
@@ -96,11 +89,13 @@ public class CommandShellRunner implements Runner {
      * @param commandLine
      * @return
      */
-    private String getGroupName(String commandLine) {
+    private String getGroupName(String commandLine) throws ShellCommandException {
         if (StringUtils.isNoneBlank(commandLine)) {
             List<String> cpmmands = Arrays.asList(commandLine.split("\\s+"));
             if (cpmmands.size() >= 1) {
                 return cpmmands.get(0);
+            }else{
+                throw new ShellCommandException("testCommand method [-p]");
             }
         }
         return "";
@@ -108,30 +103,24 @@ public class CommandShellRunner implements Runner {
 
     /**
      * 执行器
-     *
-     * @param bean       bean名字
-     * @param methodName 方法
-     * @param parameters 参数
+     * @param bean
+     * @param method
+     * @param parameters
      */
-    private void executor(String bean, String methodName, List<Object> parameters, Class<?> ... parameterTypes) {
+    private void executor(String bean, Method method,  Object[] parameters) {
         try {
             if (!org.springframework.util.StringUtils.isEmpty(bean)) {
                 Object clsObj = ApplicationContext.getBean(bean);
                 SObject result;
-                Class clazz = clsObj.getClass();
-                //得到指定的方法
-                Method method = clazz.getMethod(methodName,parameterTypes);
-                if (null == method) {
-                    LoggerUtils.info("任务:" + methodName + "指定的方法未被Spring找到!");
-                    return;
-                }
                 String name = method.getReturnType().getSimpleName();
                 if(!"void".equals(name)){
                     result = (SObject) ReflectionUtils.invokeMethod(method, clsObj, parameters);
                     ShellPrint.printResult(result);
+                }else{
+                    ReflectionUtils.invokeMethod(method, clsObj, parameters);
                 }
             }
-        } catch (NoSuchMethodException | IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
             ShellPrint.printMsg(e.getMessage());
         } finally {
