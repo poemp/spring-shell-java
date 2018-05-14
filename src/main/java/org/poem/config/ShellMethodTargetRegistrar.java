@@ -9,6 +9,7 @@ import org.poem.core.bean.ShellMethodTarget;
 import org.poem.core.exception.ShellParameterException;
 import org.poem.tools.utils.collection.Lists;
 import org.poem.tools.utils.collection.Maps;
+import org.poem.tools.utils.collection.Sets;
 import org.poem.tools.utils.logger.LoggerUtils;
 import org.poem.tools.utils.string.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 方法注册
@@ -34,7 +36,7 @@ public class ShellMethodTargetRegistrar {
      * 所有的方法都在这儿
      * 对应的是 group - 方法的参数
      */
-    private static final Map<String , List<ShellMethodTarget>> commands = Maps.emptys();
+    private static final Map<String, List<ShellMethodTarget>> commands = Maps.emptys();
 
     @Autowired
     public void setApplicationContext(ApplicationContext applicationContext) {
@@ -53,6 +55,7 @@ public class ShellMethodTargetRegistrar {
         for (String beanName : commandBeans.keySet()) {
             Object bean = commandBeans.get(beanName);
             Class<?> clazz = bean.getClass();
+            Map<String,Method> methods = Maps.emptys();
             List<ShellMethodTarget> shellMethodTargets = Lists.empty();
             ReflectionUtils.doWithMethods(clazz, new ReflectionUtils.MethodCallback() {
                 @Override
@@ -62,6 +65,11 @@ public class ShellMethodTargetRegistrar {
                     if (StringUtils.isEmpty(name)) {
                         name = method.getName();
                     }
+                    if (methods.get(name) != null) {
+                        throw new IllegalArgumentException(
+                                String.format("Illegal registration for command '%s': Attempt to register both '%s' and '%s'", name, methods.get(name), method));
+                    }
+                    methods.put(name,method);
                     String detail = shellMapping.detail();
                     Map<String, ShellMethodParameter> methodParameterMap = Maps.emptys();
                     String[] param = discoverer.getParameterNames(method);
@@ -78,7 +86,7 @@ public class ShellMethodTargetRegistrar {
                     } else {
                         for (int i = 0; i < param.length; i++) {
                             annotations = annotateds[i];
-                            methodParameterMap.put("--" + param[i], new ShellMethodParameter(param[i], paramClazzs[i],join("", annotations)));
+                            methodParameterMap.put("--" + param[i], new ShellMethodParameter(param[i], paramClazzs[i], join("", annotations)));
                         }
                         ShellMethodTarget target = new ShellMethodTarget(method, bean, name, detail, methodParameterMap);
                         shellMethodTargets.add(target);
@@ -90,22 +98,22 @@ public class ShellMethodTargetRegistrar {
                     return method.getAnnotation(ShellMethod.class) != null;
                 }
             });
-            commands.put(beanName,shellMethodTargets);
+            commands.put(beanName, shellMethodTargets);
         }
     }
 
-    private static String join(String split, Annotation ... arg){
+    private static String join(String split, Annotation... arg) {
         StringBuffer stringBuffer = new StringBuffer();
-        if(null == arg || arg.length  == 0){
+        if (null == arg || arg.length == 0) {
             return null;
         }
         for (Annotation s : arg) {
-            if (s instanceof ShellOptions){
-                ShellOptions shellOptions = (ShellOptions)s;
+            if (s instanceof ShellOptions) {
+                ShellOptions shellOptions = (ShellOptions) s;
                 stringBuffer.append(shellOptions.detail()).append(split);
             }
         }
-        return  stringBuffer.substring(0,stringBuffer.length() -1 );
+        return stringBuffer.substring(0, stringBuffer.length() - 1);
     }
 
     public static Map<String, List<ShellMethodTarget>> getCommands() {
