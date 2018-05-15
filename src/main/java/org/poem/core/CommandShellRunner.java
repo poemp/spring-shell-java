@@ -3,7 +3,6 @@ package org.poem.core;
 
 import org.apache.commons.cli.ParseException;
 import org.poem.api.Runner;
-import org.poem.config.ApplicationContext;
 import org.poem.config.ShellCommandParse;
 import org.poem.config.ShellMethodTargetRegistrar;
 import org.poem.core.bean.ShellMethodTarget;
@@ -52,24 +51,76 @@ public class CommandShellRunner implements Runner {
             String commandLine = sc.nextLine();  //读取字符串型输入
             if (StringUtils.isNotBlank(commandLine)) {
                 try {
+                    this.validate(commandLine);
                     ShellCommandParse parse = new ShellCommandParse(commands.get(getGroupName(commandLine)));
                     Object[] args = parse.getParameterValue(commandLine);
-                    String beanName = getGroupName(commandLine);
-                    if(commands.keySet().contains(beanName)){
-                        executor(parse.getCurrentMethod(), args);
-                    }else{
-
-                    }
+                    executor(parse.getCurrentMethod(), args);
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    ShellPrint.printMsg(e.getMessage());
                 } catch (ShellCommandException e) {
-                    e.printStackTrace();
+                    ShellPrint.printMsg(e.getMessage());
                 }
             } else {
                 System.err.println("\n");
             }
         }
     }
+
+    /**
+     * 获取参数
+     *
+     * @param commandLine
+     * @return
+     */
+    private String getCommand(String commandLine) {
+        if (StringUtils.isNoneBlank(commandLine)) {
+            List<String> cpmmands = Arrays.asList(commandLine.split("\\s+"));
+            if (cpmmands.size() >= 2) {
+                return cpmmands.get(1);
+            }
+        }
+        return "";
+    }
+
+    /**
+     * 获取方法名字
+     *
+     * @return
+     */
+    private Boolean getMethodList(String command) {
+        for (List<ShellMethodTarget> shellMethodTargets : commands.values()) {
+            for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
+                if (shellMethodTarget.getName().equals(command)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 验证参数名
+     *
+     * @param commandLine 命令
+     * @return
+     * @throws ShellCommandException
+     */
+    private void validate(String commandLine) throws ShellCommandException {
+        String groupName = getGroupName(commandLine);
+        String command = getCommand(commandLine);
+        //分组名称不正确
+        if (StringUtils.isEmpty(groupName) || !commands.keySet().contains(groupName)) {
+            if (!ActionEnums.HELP.equals(groupName.toUpperCase())) {
+                throw new ShellCommandException("[" + groupName + "] 不是内部命令.");
+            }
+        }
+        if (StringUtils.isEmpty(command) || !getMethodList(command)) {
+            if (!ActionEnums.HELP.equals(groupName.toUpperCase())) {
+                throw new ShellCommandException("[" + groupName + " " + command + "]不是内部命令.");
+            }
+        }
+    }
+
     /**
      * 获取当前的分组
      *
@@ -94,7 +145,7 @@ public class CommandShellRunner implements Runner {
      * @param shellMethodTarget
      * @param parameters
      */
-    private void executor( ShellMethodTarget shellMethodTarget, Object[] parameters) {
+    private void executor(ShellMethodTarget shellMethodTarget, Object[] parameters) {
         try {
             Object clsObj = shellMethodTarget.getBean();
             SObject result;
