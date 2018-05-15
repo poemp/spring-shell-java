@@ -81,7 +81,7 @@ public class ShellPrint {
     public static void printTargetMethod(String group, List<ShellMethodTarget> shellMethodTargets) {
         StringBuilder stringBuilder = new StringBuilder();
         String action = "使用方法: ";
-        if(null != shellMethodTargets){
+        if (null != shellMethodTargets) {
             for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
                 stringBuilder.append(action)
                         .append(group)
@@ -90,26 +90,28 @@ public class ShellPrint {
                         .append(" ")
                         .append(getPara(shellMethodTarget.getMethodParameterMap()))
                         .append("\n")
-                        .append(getParameter(shellMethodTarget.getMethodParameterMap(),action))
+                        .append(getParameter(shellMethodTarget.getMethodParameterMap(), action))
                         .append("\n");
             }
         }
         printMsg(stringBuilder.toString());
     }
 
-    private static String getEmpty(int length){
+    private static String getEmpty(int length) {
         StringBuffer stringBuffer = new StringBuffer();
-        for(int i = 0 ; i < length ;i++){
+        for (int i = 0; i < length; i++) {
             stringBuffer.append(" ");
         }
         return stringBuffer.toString();
     }
+
     /**
      * 获取参数
+     *
      * @param stringShellMethodParameterMap
      * @return
      */
-    public static String getPara(Map<String, ShellMethodParameter> stringShellMethodParameterMap){
+    public static String getPara(Map<String, ShellMethodParameter> stringShellMethodParameterMap) {
         StringBuilder stringBuilder = new StringBuilder();
         for (ShellMethodParameter shellMethodParameter : stringShellMethodParameterMap.values()) {
             stringBuilder.append("[")
@@ -122,6 +124,7 @@ public class ShellPrint {
         }
         return stringBuilder.toString();
     }
+
     /**
      * 段参数
      *
@@ -138,21 +141,17 @@ public class ShellPrint {
      * @param stringShellMethodParameterMap
      * @return
      */
-    private static String getParameter(Map<String, ShellMethodParameter> stringShellMethodParameterMap,String action ) {
+    private static String getParameter(Map<String, ShellMethodParameter> stringShellMethodParameterMap, String action) {
         StringBuilder stringBuilder = new StringBuilder();
         for (ShellMethodParameter shellMethodParameter : stringShellMethodParameterMap.values()) {
+
             stringBuilder
                     .append(getEmpty(action.length()))
-                    .append(" -")
-                    .append(shortName(shellMethodParameter.getName()))
-                    .append(",--")
-                    .append(shellMethodParameter.getName())
-                    .append(" ")
-                    .append("<")
-                    .append(shellMethodParameter.getName().toUpperCase())
-                    .append(">")
-                    .append("   ")
-                    .append(shellMethodParameter.getDetail())
+                    .append(String.format("%-3s,%-10s %-10s %-100s",
+                            "-" + shortName(shellMethodParameter.getName()),
+                            "--" + shellMethodParameter.getName(),
+                            "<" + shellMethodParameter.getName().toUpperCase() + ">",
+                            shellMethodParameter.getDetail()))
                     .append("\n");
         }
         return stringBuilder.toString();
