@@ -3,6 +3,7 @@ package org.poem.config;
 import org.apache.commons.cli.*;
 import org.poem.core.bean.ShellMethodParameter;
 import org.poem.core.bean.ShellMethodTarget;
+import org.poem.core.enums.ActionEnums;
 import org.poem.core.print.ShellPrint;
 import org.poem.tools.utils.collection.CollectionUtils;
 import org.poem.tools.utils.collection.Lists;
@@ -28,11 +29,11 @@ public class ShellCommandParse {
 
     private List<Class> parameterTypes = Lists.empty();
 
-    private Method currentMethod;
-
     private int parameterCount = 0;
 
     private String groupName;
+
+    private ShellMethodTarget shellMethodTarget;
 
     public ShellCommandParse(Collection<ShellMethodTarget> commands) {
         this.commands = CollectionUtils.isNotEmpty(commands) ? commands : Lists.empty();
@@ -49,6 +50,11 @@ public class ShellCommandParse {
     }
 
 
+    /**
+     *
+     * @param command
+     * @return
+     */
     @SuppressWarnings({"deprecation", "static-access"})
     private ShellCommandParse createParse(String command) {
         if (!this.commands.isEmpty()) {
@@ -56,22 +62,22 @@ public class ShellCommandParse {
             for (ShellMethodTarget shellMethodTarget : this.commands) {
                 Option option;
                Options s =  new Options();
+                if(this.shellMethodTarget == null && ActionEnums.DEFAULTMETHOD.getAction().equals(shellMethodTarget.getName())){
+                    this.shellMethodTarget = shellMethodTarget;
+                }
                 for (ShellMethodParameter shellMethodParameter : shellMethodTarget.getMethodParameterMap().values()) {
                     String shortName = this.shortName(shellMethodParameter.getName());
                     if (command.equals(shellMethodTarget.getName())) {
-                        //当前调用的方法
-                        currentMethod = shellMethodTarget.getMethod();
                         parameterCount += 1;
                         longArgName.add(shellMethodParameter.getName());
                         shortArgName.add(shortName);
                         parameterTypes.add(shellMethodParameter.getClazz());
-
                     }
                     String detail = shellMethodParameter.getDetail();
                     option = OptionBuilder
                             .withLongOpt(shellMethodParameter.getName())
                             .withDescription(detail)
-                            .withArgName(shellMethodParameter.getName())
+                            .withArgName(shellMethodParameter.getName().toUpperCase())
                             .hasArg().create(shortName);
                     if("".equals(command)){
                         s.addOption(option);
@@ -87,8 +93,12 @@ public class ShellCommandParse {
         return this;
     }
 
-    public Method getCurrentMethod(){
-        return  this.currentMethod;
+    /**
+     * 获取当前的方法
+     * @return
+     */
+    public ShellMethodTarget getCurrentMethod(){
+        return  this.shellMethodTarget;
     }
     /**
      * 获取值

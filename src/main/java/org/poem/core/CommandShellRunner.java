@@ -1,7 +1,7 @@
 package org.poem.core;
 
 
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.ParseException;
 import org.poem.api.Runner;
 import org.poem.config.ApplicationContext;
 import org.poem.config.ShellCommandParse;
@@ -11,23 +11,17 @@ import org.poem.core.enums.ActionEnums;
 import org.poem.core.exception.ShellCommandException;
 import org.poem.core.lang.SObject;
 import org.poem.core.print.ShellPrint;
-import org.poem.tools.utils.collection.CollectionUtils;
-import org.poem.tools.utils.collection.Lists;
-import org.poem.tools.utils.logger.LoggerUtils;
 import org.poem.tools.utils.string.StringUtils;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.core.DefaultParameterNameDiscoverer;
-import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
 import java.io.PrintWriter;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Executable;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 /**
  * 执行器
@@ -40,8 +34,6 @@ public class CommandShellRunner implements Runner {
     Scanner sc = new Scanner(System.in);
 
     private Map<String, List<ShellMethodTarget>> commands;
-
-    private CommandLineParser parser = new DefaultParser();
 
 
     public CommandShellRunner() {
@@ -59,30 +51,25 @@ public class CommandShellRunner implements Runner {
             pw.flush();
             String commandLine = sc.nextLine();  //读取字符串型输入
             if (StringUtils.isNotBlank(commandLine)) {
-                if(ActionEnums.HELP.getAction().equals(commandLine)){
-                    //帮助
-                    for (String s : commands.keySet()) {
-                        ShellCommandParse parse = new ShellCommandParse(commands.get(s));
-                        parse.printHelp(s);
+                try {
+                    ShellCommandParse parse = new ShellCommandParse(commands.get(getGroupName(commandLine)));
+                    Object[] args = parse.getParameterValue(commandLine);
+                    String beanName = getGroupName(commandLine);
+                    if(commands.keySet().contains(beanName)){
+                        executor(parse.getCurrentMethod(), args);
+                    }else{
+
                     }
-                }else{
-                    try {
-                        ShellCommandParse parse = new ShellCommandParse(commands.get(getGroupName(commandLine)));
-                        Object[] args = parse.getParameterValue(commandLine);
-                        String beanName = getGroupName(commandLine);
-                        executor(beanName,parse.getCurrentMethod(),args);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    } catch (ShellCommandException e) {
-                        e.printStackTrace();
-                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                } catch (ShellCommandException e) {
+                    e.printStackTrace();
                 }
             } else {
                 System.err.println("\n");
             }
         }
     }
-
     /**
      * 获取当前的分组
      *
@@ -94,8 +81,8 @@ public class CommandShellRunner implements Runner {
             List<String> cpmmands = Arrays.asList(commandLine.split("\\s+"));
             if (cpmmands.size() >= 1) {
                 return cpmmands.get(0);
-            }else{
-                throw new ShellCommandException("testCommand method [-p]");
+            } else {
+                throw new ShellCommandException("for example: testCommand method [-p]");
             }
         }
         return "";
@@ -103,22 +90,21 @@ public class CommandShellRunner implements Runner {
 
     /**
      * 执行器
-     * @param bean
-     * @param method
+     *
+     * @param shellMethodTarget
      * @param parameters
      */
-    private void executor(String bean, Method method,  Object[] parameters) {
+    private void executor( ShellMethodTarget shellMethodTarget, Object[] parameters) {
         try {
-            if (!org.springframework.util.StringUtils.isEmpty(bean)) {
-                Object clsObj = ApplicationContext.getBean(bean);
-                SObject result;
-                String name = method.getReturnType().getSimpleName();
-                if(!"void".equals(name)){
-                    result = (SObject) ReflectionUtils.invokeMethod(method, clsObj, parameters);
-                    ShellPrint.printResult(result);
-                }else{
-                    ReflectionUtils.invokeMethod(method, clsObj, parameters);
-                }
+            Object clsObj = shellMethodTarget.getBean();
+            SObject result;
+            Method method = shellMethodTarget.getMethod();
+            String name = method.getReturnType().getSimpleName();
+            if (!"void".equals(name)) {
+                result = (SObject) ReflectionUtils.invokeMethod(method, clsObj, parameters);
+                ShellPrint.printResult(result);
+            } else {
+                ReflectionUtils.invokeMethod(method, clsObj, parameters);
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
