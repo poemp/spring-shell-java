@@ -47,7 +47,7 @@ public class CommandShellRunner implements Runner {
     public void run(ApplicationArguments applicationArguments) {
         PrintWriter pw = new PrintWriter(System.out);
         while (true) {
-            pw.print("输入:");
+            pw.print("\n输入:");
             pw.flush();
             String commandLine = sc.nextLine();  //读取字符串型输入
             if (StringUtils.isNotBlank(commandLine)) {
