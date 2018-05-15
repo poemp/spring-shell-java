@@ -63,6 +63,13 @@ public class CommandShellRunner implements Runner {
                     ShellPrint.printMsg(e.getMessage());
                 } catch (ShellCommandException e) {
                     ShellPrint.printMsg(e.getMessage());
+                }catch (Exception e){
+                    if(e instanceof UndeclaredThrowableException){
+                        ShellPrint.printMsg("错误信息："+ ((UndeclaredThrowableException) e).getUndeclaredThrowable().getLocalizedMessage());
+                    }
+                    else{
+                        ShellPrint.printMsg(e.getMessage());
+                    }
                 }
             } else {
                 System.err.println("\n");
@@ -152,11 +159,10 @@ public class CommandShellRunner implements Runner {
     private void executor(ShellMethodTarget shellMethodTarget, Object[] parameters) {
         try {
             Object clsObj = shellMethodTarget.getBean();
-            SObject result;
             Method method = shellMethodTarget.getMethod();
             String name = method.getReturnType().getSimpleName();
             if (!"void".equals(name)) {
-                result = (SObject) ReflectionUtils.invokeMethod(method, clsObj, parameters);
+                Object result = ReflectionUtils.invokeMethod(method, clsObj, parameters);
                 ShellPrint.printResult(result);
             } else {
                 ReflectionUtils.invokeMethod(method, clsObj, parameters);

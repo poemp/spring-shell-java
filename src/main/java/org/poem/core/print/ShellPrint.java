@@ -8,6 +8,7 @@ import org.poem.core.lang.SObject;
 import org.poem.tools.utils.string.StringUtils;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class ShellPrint {
      */
     public static void printUnrecognizOption(String group, String command, Options options) {
         HelpFormatter formatter = new HelpFormatter();
-        printMsg(group + "\n");
+        printMsg(group);
         formatter.printHelp(command, options);
     }
 
@@ -54,9 +55,21 @@ public class ShellPrint {
      * @param result
      * @param <T>
      */
-    public static <T extends SObject> void printResult(T result) {
+    public static void printResult(Object result) {
         PrintWriter pw = new PrintWriter(System.out);
-        pw.print(result.sToString() + "\n");
+        //如果是数组
+        if (result instanceof ArrayList) {
+            List<Object> list = (List<Object>) result;
+            for (Object o : list) {
+                if (o instanceof SObject) {
+                    pw.print(((SObject) result).sToString());
+                } else {
+                    pw.print(result);
+                }
+            }
+        } else {
+            pw.print(result);
+        }
         pw.flush();
     }
 
@@ -67,7 +80,7 @@ public class ShellPrint {
      */
     public static void printMsg(String message) {
         PrintWriter pw = new PrintWriter(System.out);
-        pw.print(message + "\n");
+        pw.print(message);
         pw.flush();
     }
 
