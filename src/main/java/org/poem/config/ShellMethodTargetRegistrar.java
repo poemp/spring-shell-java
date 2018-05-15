@@ -53,8 +53,13 @@ public class ShellMethodTargetRegistrar {
         //获取方法参数名
         LocalVariableTableParameterNameDiscoverer discoverer = new LocalVariableTableParameterNameDiscoverer();
         for (String beanName : commandBeans.keySet()) {
+            String bName = beanName;
             Object bean = commandBeans.get(beanName);
             Class<?> clazz = bean.getClass();
+            ShellComponent shellOptions = clazz.getAnnotation(ShellComponent.class);
+            if(shellOptions!= null && StringUtils.isNoneBlank(shellOptions.name())){
+                bName =shellOptions.name();
+            }
             Map<String,Method> methods = Maps.emptys();
             List<ShellMethodTarget> shellMethodTargets = Lists.empty();
             ReflectionUtils.doWithMethods(clazz, new ReflectionUtils.MethodCallback() {
@@ -98,7 +103,7 @@ public class ShellMethodTargetRegistrar {
                     return method.getAnnotation(ShellMethod.class) != null;
                 }
             });
-            commands.put(beanName, shellMethodTargets);
+            commands.put(bName, shellMethodTargets);
         }
     }
 
