@@ -160,7 +160,11 @@ public class CommandShellRunner implements Runner {
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             ShellPrint.printMsg(e.getMessage());
-        } finally {
+        } catch (Exception e){
+            if(e instanceof UndeclaredThrowableException){
+                ShellPrint.printMsg("错误信息："+ ((UndeclaredThrowableException) e).getUndeclaredThrowable().getLocalizedMessage());
+            }
+        }finally {
             //打印数据
             ShellPrint.printMsg("\n");
         }
