@@ -71,6 +71,7 @@ public class ShellCommandParse {
                         parameterCount += 1;
                         longArgName.add(shellMethodParameter.getName());
                         shortArgName.add(shortName);
+                         this.shellMethodTarget = shellMethodTarget;
                         parameterTypes.add(shellMethodParameter.getClazz());
                     }
                     String detail = shellMethodParameter.getDetail();
