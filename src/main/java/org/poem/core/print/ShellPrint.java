@@ -1,12 +1,10 @@
 package org.poem.core.print;
 
 import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.poem.core.bean.ShellMethodParameter;
 import org.poem.core.bean.ShellMethodTarget;
 import org.poem.core.lang.SObject;
-import org.poem.tools.utils.collection.Lists;
 import org.poem.tools.utils.string.StringUtils;
 
 import java.io.PrintWriter;
@@ -80,22 +78,50 @@ public class ShellPrint {
      * @param group              组
      * @param shellMethodTargets 方法
      */
-    public static void printTragetMethod(String group, List<ShellMethodTarget> shellMethodTargets) {
+    public static void printTargetMethod(String group, List<ShellMethodTarget> shellMethodTargets) {
         StringBuilder stringBuilder = new StringBuilder();
+        String action = "使用方法: ";
         if(null != shellMethodTargets){
             for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
-                stringBuilder
+                stringBuilder.append(action)
                         .append(group)
                         .append(" ")
                         .append(shellMethodTarget.getName())
+                        .append(" ")
+                        .append(getPara(shellMethodTarget.getMethodParameterMap()))
                         .append("\n")
-                        .append(getParameter(shellMethodTarget.getMethodParameterMap()))
+                        .append(getParameter(shellMethodTarget.getMethodParameterMap(),action))
                         .append("\n");
             }
         }
         printMsg(stringBuilder.toString());
     }
 
+    private static String getEmpty(int length){
+        StringBuffer stringBuffer = new StringBuffer();
+        for(int i = 0 ; i < length ;i++){
+            stringBuffer.append(" ");
+        }
+        return stringBuffer.toString();
+    }
+    /**
+     * 获取参数
+     * @param stringShellMethodParameterMap
+     * @return
+     */
+    public static String getPara(Map<String, ShellMethodParameter> stringShellMethodParameterMap){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (ShellMethodParameter shellMethodParameter : stringShellMethodParameterMap.values()) {
+            stringBuilder.append("[")
+                    .append("-")
+                    .append(shortName(shellMethodParameter.getName()))
+                    .append(",")
+                    .append("--")
+                    .append(shellMethodParameter.getName())
+                    .append("]");
+        }
+        return stringBuilder.toString();
+    }
     /**
      * 段参数
      *
@@ -112,11 +138,12 @@ public class ShellPrint {
      * @param stringShellMethodParameterMap
      * @return
      */
-    private static String getParameter(Map<String, ShellMethodParameter> stringShellMethodParameterMap) {
+    private static String getParameter(Map<String, ShellMethodParameter> stringShellMethodParameterMap,String action ) {
         StringBuilder stringBuilder = new StringBuilder();
         for (ShellMethodParameter shellMethodParameter : stringShellMethodParameterMap.values()) {
             stringBuilder
-                    .append("     -")
+                    .append(getEmpty(action.length()))
+                    .append(" -")
                     .append(shortName(shellMethodParameter.getName()))
                     .append(",--")
                     .append(shellMethodParameter.getName())

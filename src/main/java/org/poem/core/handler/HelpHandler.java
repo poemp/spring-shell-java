@@ -7,6 +7,7 @@ import org.poem.config.ShellMethodTargetRegistrar;
 import org.poem.core.annotation.ShellComponent;
 import org.poem.core.annotation.ShellMethod;
 import org.poem.core.bean.ShellMethodTarget;
+import org.poem.core.print.ShellPrint;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +29,7 @@ public class HelpHandler extends Hanlder {
     public void defaultMethod() {
         //帮助
         for (String s : commands.keySet()) {
-            ShellCommandParse parse = new ShellCommandParse(commands.get(s));
-            parse.printHelp(s);
+            ShellPrint.printTargetMethod(s,commands.get(s));
         }
     }
 }

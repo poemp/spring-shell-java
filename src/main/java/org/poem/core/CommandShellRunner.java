@@ -17,6 +17,7 @@ import org.springframework.util.ReflectionUtils;
 
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,9 @@ public class CommandShellRunner implements Runner {
             pw.flush();
             String commandLine = sc.nextLine();  //读取字符串型输入
             if (StringUtils.isNotBlank(commandLine)) {
+                if (ActionEnums.EXIT.getAction().equalsIgnoreCase(commandLine)) {
+                    System.exit(0);
+                }
                 try {
                     this.validate(commandLine);
                     ShellCommandParse parse = new ShellCommandParse(commands.get(getGroupName(commandLine)));
@@ -160,11 +164,13 @@ public class CommandShellRunner implements Runner {
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             ShellPrint.printMsg(e.getMessage());
-        } catch (Exception e){
-            if(e instanceof UndeclaredThrowableException){
-                ShellPrint.printMsg("错误信息："+ ((UndeclaredThrowableException) e).getUndeclaredThrowable().getLocalizedMessage());
+        } catch (Exception e) {
+            if (e instanceof UndeclaredThrowableException) {
+                ShellPrint.printMsg("错误信息：" + ((UndeclaredThrowableException) e).getUndeclaredThrowable().getLocalizedMessage());
+            } else {
+                ShellPrint.printMsg(e.getMessage());
             }
-        }finally {
+        } finally {
             //打印数据
             ShellPrint.printMsg("\n");
         }

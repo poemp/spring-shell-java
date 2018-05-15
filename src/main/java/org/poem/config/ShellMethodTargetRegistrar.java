@@ -118,7 +118,8 @@ public class ShellMethodTargetRegistrar {
                 stringBuffer.append(shellOptions.detail()).append(split);
             }
         }
-        return stringBuffer.substring(0, stringBuffer.length() - 1);
+        String options = stringBuffer.toString();
+        return options.endsWith(split) ?  stringBuffer.substring(0, stringBuffer.length() - 1) : options;
     }
 
     public static Map<String, List<ShellMethodTarget>> getCommands() {

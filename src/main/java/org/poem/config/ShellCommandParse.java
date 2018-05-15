@@ -203,9 +203,4 @@ public class ShellCommandParse {
         }
         return "";
     }
-
-    public void printHelp(String commandLine){
-        this.groupName = commandLine;
-        this.createParse(getCommand(commandLine));
-    }
 }
