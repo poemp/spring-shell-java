@@ -29,11 +29,11 @@ public class ShellMethodTarget {
     /**
      * 方法的参数
      */
-    private final Map<String ,ShellMethodParameter> methodParameterMap;
+    private final List<ShellMethodParameter> methodParameterMap;
 
 
 
-    public ShellMethodTarget(Method method, Object bean, String name, String detail, Map<String, ShellMethodParameter> methodParameterMap) {
+    public ShellMethodTarget(Method method, Object bean, String name, String detail, List<ShellMethodParameter> methodParameterMap) {
         this.method = method;
         this.bean = bean;
         this.name = name;
@@ -41,7 +41,7 @@ public class ShellMethodTarget {
         this.methodParameterMap = methodParameterMap;
     }
 
-    public Map<String, ShellMethodParameter> getMethodParameterMap() {
+    public List<ShellMethodParameter> getMethodParameterMap() {
         return methodParameterMap;
     }
 
