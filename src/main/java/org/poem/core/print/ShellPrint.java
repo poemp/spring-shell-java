@@ -124,9 +124,9 @@ public class ShellPrint {
      * @param stringShellMethodParameterMap
      * @return
      */
-    public static String getPara(Map<String, ShellMethodParameter> stringShellMethodParameterMap) {
+    public static String getPara(List<ShellMethodParameter> stringShellMethodParameterMap) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (ShellMethodParameter shellMethodParameter : stringShellMethodParameterMap.values()) {
+        for (ShellMethodParameter shellMethodParameter : stringShellMethodParameterMap) {
             stringBuilder.append("[")
                     .append("-")
                     .append(shortName(shellMethodParameter.getName()))
@@ -154,9 +154,9 @@ public class ShellPrint {
      * @param stringShellMethodParameterMap
      * @return
      */
-    private static String getParameter(Map<String, ShellMethodParameter> stringShellMethodParameterMap, String action) {
+    private static String getParameter(List<ShellMethodParameter> stringShellMethodParameterMap, String action) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (ShellMethodParameter shellMethodParameter : stringShellMethodParameterMap.values()) {
+        for (ShellMethodParameter shellMethodParameter : stringShellMethodParameterMap) {
 
             stringBuilder
                     .append(getEmpty(action.length()))

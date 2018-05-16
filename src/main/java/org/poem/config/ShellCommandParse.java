@@ -65,7 +65,7 @@ public class ShellCommandParse {
                 if(this.shellMethodTarget == null && ActionEnums.DEFAULTMETHOD.getAction().equals(shellMethodTarget.getName())){
                     this.shellMethodTarget = shellMethodTarget;
                 }
-                for (ShellMethodParameter shellMethodParameter : shellMethodTarget.getMethodParameterMap().values()) {
+                for (ShellMethodParameter shellMethodParameter : shellMethodTarget.getMethodParameterMap()) {
                     String shortName = this.shortName(shellMethodParameter.getName());
                     if (command.equals(shellMethodTarget.getName())) {
                         parameterCount += 1;

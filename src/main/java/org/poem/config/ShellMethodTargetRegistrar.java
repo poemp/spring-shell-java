@@ -57,10 +57,10 @@ public class ShellMethodTargetRegistrar {
             Object bean = commandBeans.get(beanName);
             Class<?> clazz = bean.getClass();
             ShellComponent shellOptions = clazz.getAnnotation(ShellComponent.class);
-            if(shellOptions!= null && StringUtils.isNoneBlank(shellOptions.name())){
-                bName =shellOptions.name();
+            if (shellOptions != null && StringUtils.isNoneBlank(shellOptions.name())) {
+                bName = shellOptions.name();
             }
-            Map<String,Method> methods = Maps.emptys();
+            Map<String, Method> methods = Maps.emptys();
             List<ShellMethodTarget> shellMethodTargets = Lists.empty();
             ReflectionUtils.doWithMethods(clazz, new ReflectionUtils.MethodCallback() {
                 @Override
@@ -74,9 +74,9 @@ public class ShellMethodTargetRegistrar {
                         throw new IllegalArgumentException(
                                 String.format("Illegal registration for command '%s': Attempt to register both '%s' and '%s'", name, methods.get(name), method));
                     }
-                    methods.put(name,method);
+                    methods.put(name, method);
                     String detail = shellMapping.detail();
-                    Map<String, ShellMethodParameter> methodParameterMap = Maps.emptys();
+                    List<ShellMethodParameter> methodParameterMap = Lists.empty();
                     String[] param = discoverer.getParameterNames(method);
                     Annotation[][] annotateds = method.getParameterAnnotations();
                     Annotation[] annotations;
@@ -91,7 +91,7 @@ public class ShellMethodTargetRegistrar {
                     } else {
                         for (int i = 0; i < param.length; i++) {
                             annotations = annotateds[i];
-                            methodParameterMap.put("--" + param[i], new ShellMethodParameter(param[i], paramClazzs[i], join("", annotations)));
+                            methodParameterMap.add(new ShellMethodParameter(param[i], paramClazzs[i], join("", annotations)));
                         }
                         ShellMethodTarget target = new ShellMethodTarget(method, bean, name, detail, methodParameterMap);
                         shellMethodTargets.add(target);
@@ -119,7 +119,7 @@ public class ShellMethodTargetRegistrar {
             }
         }
         String options = stringBuffer.toString();
-        return options.endsWith(split) ?  options.trim() : options;
+        return options.endsWith(split) ? options.trim() : options;
     }
 
     public static Map<String, List<ShellMethodTarget>> getCommands() {
