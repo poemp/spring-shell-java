@@ -10,19 +10,23 @@ import org.poem.tools.utils.string.StringUtils;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ShellPrint {
 
+    private static final String spilt = " ";
+    private static final String action = "用法: ";
+    private static final String methodDetail = "说明：";
+    private static final String detail = "选项：";
     /**
      * 打印帮助信息
-     *
-     * @param command
-     * @param options
      */
-    public static void printHelp(String command, Options options) {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(command, options);
+    public static void printFirstMessage() {
+        printMsg("启动完成.");
+        printMsg("--------------------------------------------------");
+        printMsg("信息：");
+        printMsg("      1、使用 help 查看帮助信息以及相应的命令的用法");
+        printMsg("      2、使用 exit 可以安全退出当前应用");
+        printMsg("--------------------------------------------------");
     }
 
     /**
@@ -37,23 +41,11 @@ public class ShellPrint {
         formatter.printHelp(command, options);
     }
 
-    /**
-     * @param group
-     * @param command
-     * @param options
-     */
-    public static void printUnrecognizOption(String group, String command, Options options) {
-        HelpFormatter formatter = new HelpFormatter();
-        printMsg(group);
-        formatter.printHelp(command, options);
-    }
-
 
     /**
      * 打印结果
      *
      * @param result
-     * @param <T>
      */
     public static void printResult(Object result) {
         PrintWriter pw = new PrintWriter(System.out);
@@ -68,7 +60,11 @@ public class ShellPrint {
                 }
             }
         } else {
-            pw.print(result);
+            if (result instanceof SObject) {
+                pw.print(((SObject) result).sToString());
+            } else {
+                pw.print(result);
+            }
         }
         pw.flush();
     }
@@ -80,7 +76,7 @@ public class ShellPrint {
      */
     public static void printMsg(String message) {
         PrintWriter pw = new PrintWriter(System.out);
-        pw.print(message);
+        pw.print(message + "\n");
         pw.flush();
     }
 
@@ -93,27 +89,31 @@ public class ShellPrint {
      */
     public static void printTargetMethod(String group, List<ShellMethodTarget> shellMethodTargets) {
         StringBuilder stringBuilder = new StringBuilder();
-        String action = "使用方法: ";
         if (null != shellMethodTargets) {
             for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
-                stringBuilder.append(action)
-                        .append(group)
-                        .append(" ")
-                        .append(shellMethodTarget.getName())
-                        .append(" ")
-                        .append(getPara(shellMethodTarget.getMethodParameterMap()))
-                        .append("\n")
-                        .append(getParameter(shellMethodTarget.getMethodParameterMap(), action))
-                        .append("\n");
+                stringBuilder.append(action).append(group).append(spilt).append(shellMethodTarget.getName()).append(spilt).append(getPara(shellMethodTarget.getMethodParameterMap()));//参数;
+                if(StringUtils.isNotBlank(shellMethodTarget.getDetail())){
+                    stringBuilder.append("\n");
+                    stringBuilder.append(methodDetail).append(shellMethodTarget.getDetail());
+                }
+                stringBuilder.append("\n");
+                stringBuilder.append(detail).append("\n").append(getParameter(shellMethodTarget.getMethodParameterMap(), action));//参数详细介绍
+                stringBuilder.append("\n");
             }
         }
         printMsg(stringBuilder.toString());
     }
 
+    /**
+     * 格式花显示
+     *
+     * @param length
+     * @return
+     */
     private static String getEmpty(int length) {
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < length; i++) {
-            stringBuffer.append(" ");
+            stringBuffer.append(spilt);
         }
         return stringBuffer.toString();
     }

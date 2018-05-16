@@ -40,12 +40,15 @@ public class CommandShellRunner implements Runner {
         commands = ShellMethodTargetRegistrar.getCommands();
     }
 
+
+
     /**
      * @param applicationArguments
      */
     @Override
     public void run(ApplicationArguments applicationArguments) {
         PrintWriter pw = new PrintWriter(System.out);
+        ShellPrint.printFirstMessage();
         while (true) {
             pw.print("\n输入>:");
             pw.flush();

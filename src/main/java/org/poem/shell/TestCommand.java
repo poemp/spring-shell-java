@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 @ShellComponent(name = "test")
 public class TestCommand {
-    @ShellMethod(name = "method2", detail = "")
+    @ShellMethod(name = "method2", detail = "测试方法第二")
     public void method2(@ShellOptions(detail = "4542512sdf2das1g54dagf") String name,
                         @ShellOptions(detail = "4542512sdf2das1g54dagf") String dsfds,
                         @ShellOptions(detail = "Ip地址") String ip,
