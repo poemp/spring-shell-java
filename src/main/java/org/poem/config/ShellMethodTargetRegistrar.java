@@ -78,6 +78,7 @@ public class ShellMethodTargetRegistrar {
                     String detail = shellMapping.detail();
                     List<ShellMethodParameter> methodParameterMap = Lists.empty();
                     String[] param = discoverer.getParameterNames(method);
+                    this.validateShortName(beanName,method,param);
                     Annotation[][] annotateds = method.getParameterAnnotations();
                     Annotation[] annotations;
                     Class[] paramClazzs = method.getParameterTypes();
@@ -95,6 +96,26 @@ public class ShellMethodTargetRegistrar {
                         }
                         ShellMethodTarget target = new ShellMethodTarget(method, bean, name, detail, methodParameterMap);
                         shellMethodTargets.add(target);
+                    }
+                }
+
+                /**
+                 * 自定义方法
+                 * @param param
+                 */
+                private void validateShortName(String name,Method method, String[] param) {
+                    Map<String, String> mSets = Maps.emptys();
+                    String shortName;
+                    if(null != param && param.length > 0){
+                        for (String s : param) {
+                            shortName = StringUtils.shortName(s);
+                            if(mSets.keySet().contains(shortName)){
+                                throw new IllegalArgumentException(
+                                        String.format("Illegal registration for class  '%s' ," +
+                                                " method '%s': Attempt to register both parameter option '-%s'(%s) and '-%s'(%s)", name, method,shortName,mSets.get(shortName) ,shortName,s));
+                            }
+                            mSets.put(shortName,s);
+                        }
                     }
                 }
             }, new ReflectionUtils.MethodFilter() {
@@ -122,6 +143,10 @@ public class ShellMethodTargetRegistrar {
         return options.endsWith(split) ? options.trim() : options;
     }
 
+    /**
+     * 获取命令
+     * @return
+     */
     public static Map<String, List<ShellMethodTarget>> getCommands() {
         return commands;
     }

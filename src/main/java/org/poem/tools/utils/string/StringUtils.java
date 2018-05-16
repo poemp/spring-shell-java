@@ -98,4 +98,14 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils{
             sb.append(b);
         }
     }
+
+    /**
+     * 段参数
+     *
+     * @param name
+     * @return
+     */
+    public  static  String shortName(String name) {
+        return StringUtils.isNotBlank(name) ? name.substring(0, 1) : "";
+    }
 }

@@ -96,8 +96,14 @@ public class ShellPrint {
                     stringBuilder.append("\n");
                     stringBuilder.append(methodDetail).append(shellMethodTarget.getDetail());
                 }
-                stringBuilder.append("\n");
-                stringBuilder.append(detail).append("\n").append(getParameter(shellMethodTarget.getMethodParameterMap(), action));//参数详细介绍
+                String par = getParameter(shellMethodTarget.getMethodParameterMap(), action);
+                if(StringUtils.isNotBlank(par)){
+                    stringBuilder.append("\n");
+                    stringBuilder
+                            .append(detail)
+                            .append("\n")
+                            .append(par);//参数详细介绍
+                }
                 stringBuilder.append("\n");
             }
         }

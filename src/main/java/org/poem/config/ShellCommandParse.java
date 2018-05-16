@@ -4,12 +4,10 @@ import org.apache.commons.cli.*;
 import org.poem.core.bean.ShellMethodParameter;
 import org.poem.core.bean.ShellMethodTarget;
 import org.poem.core.enums.ActionEnums;
-import org.poem.core.print.ShellPrint;
 import org.poem.tools.utils.collection.CollectionUtils;
 import org.poem.tools.utils.collection.Lists;
 import org.poem.tools.utils.string.StringUtils;
 
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -85,9 +83,6 @@ public class ShellCommandParse {
                     }else{
                         searchOpts.addOption(option);
                     }
-                }
-                if("".equals(command)){
-                    ShellPrint.printHelp(groupName,shellMethodTarget.getName(),s);
                 }
             }
         }

@@ -63,10 +63,13 @@ public class CommandShellRunner implements Runner {
                     Object[] args = parse.getParameterValue(commandLine);
                     executor(parse.getCurrentMethod(), args);
                 } catch (ParseException e) {
+                    //参数转换异常
                     ShellPrint.printMsg(e.getMessage());
                 } catch (ShellCommandException e) {
+                    //输入的命令异常
                     ShellPrint.printMsg(e.getMessage());
                 }catch (Exception e){
+                    //调用的方法中出现异常
                     if(e instanceof UndeclaredThrowableException){
                         ShellPrint.printMsg("错误信息："+ ((UndeclaredThrowableException) e).getUndeclaredThrowable().getLocalizedMessage());
                     }
