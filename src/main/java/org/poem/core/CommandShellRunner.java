@@ -63,16 +63,20 @@ public class CommandShellRunner implements Runner {
                     executor(parse.getCurrentMethod(), args);
                 } catch (ParseException e) {
                     //参数转换异常
+                    LoggerUtils.error(e);
                     ShellPrint.printMsg(e.getMessage());
                 } catch (ShellCommandException e) {
                     //输入的命令异常
+                    LoggerUtils.error(e);
                     ShellPrint.printMsg(e.getMessage());
                 }catch (Exception e){
                     //调用的方法中出现异常
                     if(e instanceof UndeclaredThrowableException){
+                        LoggerUtils.error(e);
                         ShellPrint.printMsg("错误信息："+ ((UndeclaredThrowableException) e).getUndeclaredThrowable().getLocalizedMessage());
                     }
                     else{
+                        LoggerUtils.error(e);
                         ShellPrint.printMsg(e.getMessage());
                     }
                 }
@@ -173,9 +177,10 @@ public class CommandShellRunner implements Runner {
                 ReflectionUtils.invokeMethod(method, clsObj, parameters);
             }
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            LoggerUtils.error(e);
             ShellPrint.printMsg(e.getMessage());
         } catch (Exception e) {
+            LoggerUtils.error(e);
             if (e instanceof UndeclaredThrowableException) {
                 ShellPrint.printMsg("错误信息：" + ((UndeclaredThrowableException) e).getUndeclaredThrowable().getLocalizedMessage());
             } else {
