@@ -20,9 +20,9 @@ public class TestCommand {
 
     @ShellMethod(name = "method", detail = "")
     public void method(
-            @ShellOptions(detail = "Ip地址") String ip,
+            @ShellOptions(detail = "Ip地址") String address,
             @ShellOptions(detail = "端口号") String id,
-            @ShellOptions(detail = "使用的年限") String age) throws FileNotFoundException {
-        throw new FileNotFoundException(ip + " " + id + " " + age);
+            @ShellOptions(detail = "使用的年限") String year) throws FileNotFoundException {
+        throw new FileNotFoundException(address + " " + id + " " + year);
     }
 }

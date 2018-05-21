@@ -1,0 +1,13 @@
+[Shell] 2018-05-21 21:26:04 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 8104 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-21 21:26:04 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-21 21:26:04 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@a22cb6a: startup date [Mon May 21 21:26:04 CST 2018]; root of context hierarchy
+[Shell] 2018-05-21 21:26:05 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-21 21:26:05 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.875 seconds (JVM running for 1.538)
+[Shell] 2018-05-21 21:26:11 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|run|71|error:org.poem.core.exception.ShellCommandException: [sfa] 不是内部命令.
+[Shell] 2018-05-21 21:27:09 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|run|71|error:org.poem.core.exception.ShellCommandException: [hsa] 不是内部命令.
+[Shell] 2018-05-21 21:27:17 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|184|error:java.lang.reflect.UndeclaredThrowableException
+[Shell] 2018-05-21 21:27:18 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|run|71|error:org.poem.core.exception.ShellCommandException: [sf] 不是内部命令.
+[Shell] 2018-05-21 21:27:19 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|run|71|error:org.poem.core.exception.ShellCommandException: [asfhjiogr] 不是内部命令.
+[Shell] 2018-05-21 21:27:21 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|run|71|error:org.poem.core.exception.ShellCommandException: [sadhfuiasdf] 不是内部命令.
+[Shell] 2018-05-21 21:27:55 [Thread-4] INFO  o.s.c.a.AnnotationConfigApplicationContext: Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@a22cb6a: startup date [Mon May 21 21:26:04 CST 2018]; root of context hierarchy
+[Shell] 2018-05-21 21:27:55 [Thread-4] INFO  o.s.j.e.a.AnnotationMBeanExporter: Unregistering JMX-exposed beans on shutdown
