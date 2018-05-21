@@ -6,13 +6,13 @@
     <!--日志模块名(如:默认(default),销售(sales),订单(orders)...)-->
     <property name="logback.logs.module.name" value="default" />
 
-    <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
-        <!--<encoder>-->
-            <!--&lt;!&ndash;格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符&ndash;&gt;-->
-            <!--<pattern>[Shell] %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5p %logger{1}: %m%n</pattern>-->
-        <!--</encoder>-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>[Shell] %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5p %logger{1}: %m%n</pattern>
+        </encoder>
 
-    <!--</appender>-->
+    </appender>
     <appender name="Shell" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <Prudent>true</Prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
