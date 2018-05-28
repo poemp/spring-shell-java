@@ -9,6 +9,7 @@ import org.poem.core.bean.ShellMethodTarget;
 import org.poem.core.enums.ActionEnums;
 import org.poem.core.exception.ShellCommandException;
 import org.poem.core.print.ShellPrint;
+import org.poem.tools.utils.collection.Lists;
 import org.poem.tools.utils.logger.LoggerUtils;
 import org.poem.tools.utils.string.StringUtils;
 import org.springframework.boot.ApplicationArguments;
@@ -61,6 +62,13 @@ public class CommandShellRunner implements Runner {
                     this.validate(commandLine);
                     ShellCommandParse parse = new ShellCommandParse(commands.get(getGroupName(commandLine)));
                     Object[] args = parse.getParameterValue(commandLine);
+                    if(parse.getCurrentMethod().getBean().getClass().getName().equals("org.poem.core.handler.HelpHandler")){
+                        args = new Object[1];
+                    }
+                    String command = getCommand(commandLine);
+                    if(StringUtils.isNotBlank(command)){
+                        args[0] = command;
+                    }
                     executor(parse.getCurrentMethod(), args);
                 } catch (ParseException e) {
                     //参数转换异常
@@ -175,7 +183,7 @@ public class CommandShellRunner implements Runner {
                 Object result = ReflectionUtils.invokeMethod(method, clsObj, parameters);
                 ShellPrint.printResult(result);
             } else {
-                ReflectionUtils.invokeMethod(method, clsObj, parameters);
+                    ReflectionUtils.invokeMethod(method, clsObj, parameters);
             }
         } catch (IllegalArgumentException e) {
             LoggerUtils.error(e);

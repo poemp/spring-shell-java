@@ -60,7 +60,7 @@ public class ShellCommandParse {
             for (ShellMethodTarget shellMethodTarget : this.commands) {
                 Option option;
                Options s =  new Options();
-                if(this.shellMethodTarget == null && ActionEnums.DEFAULTMETHOD.getAction().equals(shellMethodTarget.getName())){
+                if(this.shellMethodTarget == null && ActionEnums.DEFAULT_METHOD.getAction().equals(shellMethodTarget.getName())){
                     this.shellMethodTarget = shellMethodTarget;
                 }
                 for (ShellMethodParameter shellMethodParameter : shellMethodTarget.getMethodParameterMap()) {

@@ -1,0 +1,107 @@
+[Shell] 2018-05-28 21:19:03 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 5552 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 21:19:03 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 21:19:03 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@22295ec4: startup date [Mon May 28 21:19:03 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 21:19:04 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 21:19:04 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 1.109 seconds (JVM running for 3.07)
+[Shell] 2018-05-28 21:27:03 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 948 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 21:27:03 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 21:27:03 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@176b3f44: startup date [Mon May 28 21:27:03 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 21:27:03 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 21:27:03 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.907 seconds (JVM running for 1.562)
+[Shell] 2018-05-28 21:36:15 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 3800 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 21:36:15 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 21:36:15 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@2c1156a7: startup date [Mon May 28 21:36:15 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 21:36:16 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 21:36:16 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.82 seconds (JVM running for 1.539)
+[Shell] 2018-05-28 21:36:19 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|181|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 21:38:09 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|181|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 21:38:33 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|181|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 21:39:18 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 5088 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 21:39:18 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 21:39:18 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@3549bca9: startup date [Mon May 28 21:39:18 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 21:39:18 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 21:39:18 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 1.242 seconds (JVM running for 1.891)
+[Shell] 2018-05-28 21:40:25 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 4832 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 21:40:25 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 21:40:25 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@17aad511: startup date [Mon May 28 21:40:25 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 21:40:25 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 21:40:25 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.936 seconds (JVM running for 1.703)
+[Shell] 2018-05-28 21:40:29 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|181|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 21:42:07 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|181|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 21:42:29 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|181|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 21:44:28 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 7624 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 21:44:28 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 21:44:28 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@e19bb76: startup date [Mon May 28 21:44:28 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 21:44:28 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 21:44:28 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.936 seconds (JVM running for 1.54)
+[Shell] 2018-05-28 21:44:38 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|181|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 21:44:47 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 860 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 21:44:47 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 21:44:47 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1a760689: startup date [Mon May 28 21:44:47 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 21:44:47 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 21:44:47 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.891 seconds (JVM running for 1.499)
+[Shell] 2018-05-28 21:46:47 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 2128 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 21:46:47 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 21:46:47 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@a22cb6a: startup date [Mon May 28 21:46:47 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 21:46:48 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 21:46:48 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.896 seconds (JVM running for 1.493)
+[Shell] 2018-05-28 21:46:56 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|188|error:java.lang.NullPointerException
+[Shell] 2018-05-28 21:47:08 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|188|error:java.lang.NullPointerException
+[Shell] 2018-05-28 21:47:19 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|run|72|error:org.poem.core.exception.ShellCommandException: [elp] 不是内部命令.
+[Shell] 2018-05-28 21:47:22 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|188|error:java.lang.NullPointerException
+[Shell] 2018-05-28 21:55:40 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 7528 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 21:55:40 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 21:55:40 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@7e3181aa: startup date [Mon May 28 21:55:40 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 21:55:40 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 21:55:40 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.891 seconds (JVM running for 1.514)
+[Shell] 2018-05-28 21:56:25 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|182|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 22:00:55 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|182|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 22:14:20 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 7284 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 22:14:20 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 22:14:20 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@691939c9: startup date [Mon May 28 22:14:20 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 22:14:20 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 22:14:20 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.836 seconds (JVM running for 1.628)
+[Shell] 2018-05-28 22:14:23 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|182|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 22:17:03 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|182|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 22:17:32 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|182|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 22:17:51 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 7660 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 22:17:51 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 22:17:51 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@134d26af: startup date [Mon May 28 22:17:51 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 22:17:51 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 22:17:51 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.874 seconds (JVM running for 1.502)
+[Shell] 2018-05-28 22:17:54 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|182|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 22:17:57 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|run|72|error:org.poem.core.exception.ShellCommandException: [elp] 不是内部命令.
+[Shell] 2018-05-28 22:17:59 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|182|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 22:18:08 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 7884 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 22:18:08 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 22:18:08 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@294a6b8e: startup date [Mon May 28 22:18:08 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 22:18:08 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 22:18:08 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.86 seconds (JVM running for 1.47)
+[Shell] 2018-05-28 22:18:11 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|run|72|error:org.poem.core.exception.ShellCommandException: [hepl] 不是内部命令.
+[Shell] 2018-05-28 22:18:51 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 8076 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 22:18:51 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 22:18:51 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@77258e59: startup date [Mon May 28 22:18:51 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 22:18:52 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 22:18:52 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.86 seconds (JVM running for 1.485)
+[Shell] 2018-05-28 22:19:21 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|182|error:java.lang.IllegalArgumentException: wrong number of arguments
+[Shell] 2018-05-28 22:20:24 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 7296 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 22:20:24 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 22:20:24 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@6187d1f5: startup date [Mon May 28 22:20:24 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 22:20:24 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 22:20:24 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.863 seconds (JVM running for 1.481)
+[Shell] 2018-05-28 22:22:55 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 8 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 22:22:55 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 22:22:55 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@34a875b3: startup date [Mon May 28 22:22:55 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 22:22:55 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 22:22:55 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.878 seconds (JVM running for 1.513)
+[Shell] 2018-05-28 22:23:21 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 7864 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 22:23:21 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 22:23:21 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@6ad3381f: startup date [Mon May 28 22:23:21 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 22:23:22 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 22:23:22 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.895 seconds (JVM running for 1.629)
+[Shell] 2018-05-28 22:25:13 [main] INFO  o.p.SpringShellJavaApplication: Starting SpringShellJavaApplication on DESKTOP-A83HJIE with PID 1000 (E:\12-myFolder\25_spring-shell-java\spring-shell-java\target\classes started by poem in E:\12-myFolder\25_spring-shell-java\spring-shell-java)
+[Shell] 2018-05-28 22:25:13 [main] INFO  o.p.SpringShellJavaApplication: The following profiles are active: dev
+[Shell] 2018-05-28 22:25:13 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@77258e59: startup date [Mon May 28 22:25:13 CST 2018]; root of context hierarchy
+[Shell] 2018-05-28 22:25:13 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter: Registering beans for JMX exposure on startup
+[Shell] 2018-05-28 22:25:13 [main] INFO  o.p.SpringShellJavaApplication: Started SpringShellJavaApplication in 0.957 seconds (JVM running for 1.583)
+[Shell] 2018-05-28 22:25:26 [main] INFO  o.p.t.u.l.LoggerUtils: org.poem.core.CommandShellRunner|executor|189|error:java.lang.IllegalArgumentException: argument type mismatch

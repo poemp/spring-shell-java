@@ -5,7 +5,7 @@ import org.poem.tools.utils.string.StringUtils;
 public enum ActionEnums {
 
     HELP("help"),
-    DEFAULTMETHOD("defaultMethod"),
+    DEFAULT_METHOD("all"),
     EXIT("exit");
 
     ActionEnums(String action) {

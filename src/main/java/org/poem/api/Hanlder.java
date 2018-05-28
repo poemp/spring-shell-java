@@ -8,7 +8,7 @@ public class Hanlder {
     /**
      * 默认方法
      */
-    public void defaultMethod(){
+    public void all(){
 
     }
 }

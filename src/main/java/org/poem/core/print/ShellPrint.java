@@ -4,6 +4,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.poem.core.bean.ShellMethodParameter;
 import org.poem.core.bean.ShellMethodTarget;
+import org.poem.core.enums.ActionEnums;
 import org.poem.core.lang.SObject;
 import org.poem.tools.utils.string.StringUtils;
 
@@ -91,6 +92,9 @@ public class ShellPrint {
         StringBuilder stringBuilder = new StringBuilder();
         if (null != shellMethodTargets) {
             for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
+                if(ActionEnums.HELP.getAction().equalsIgnoreCase(group)){
+                    continue;
+                }
                 stringBuilder.append(action).append(group).append(spilt).append(shellMethodTarget.getName()).append(spilt).append(getPara(shellMethodTarget.getMethodParameterMap()));//参数;
                 if(StringUtils.isNotBlank(shellMethodTarget.getDetail())){
                     stringBuilder.append("\n");

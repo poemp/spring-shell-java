@@ -12,4 +12,10 @@ public @interface ShellOptions {
      * @return
      */
     public String detail() ;
+
+    /**
+     * 是否为空
+     * @return
+     */
+    public boolean notNull() default  false;
 }
