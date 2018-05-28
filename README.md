@@ -7,11 +7,13 @@ spring-shell-java
     @ShellComponent(name = "test")
     public class TestCommand {}
     `````
+    
 >> 2、使用@ShellMethod(name="xxx",detail="xxx")注释方法，name为名字，缺省默认为方法名
 `````
   @ShellMethod(name = "method", detail = "测试方法")
   public void method(){}
 `````
+
 >> 3、使用@ShellOptions(detail="xxx")注释方法参数
 ``````
     @ShellMethod(name = "method", detail = "")
