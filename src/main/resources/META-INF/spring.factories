@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.AutoConfiguration=\
+  org.poem.config.ApplicationContext,\
+  org.poem.config.CommandShellConfig,\
+  org.poem.core.CommandShellRunner

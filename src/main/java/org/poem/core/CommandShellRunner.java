@@ -9,7 +9,6 @@ import org.poem.core.bean.ShellMethodTarget;
 import org.poem.core.enums.ActionEnums;
 import org.poem.core.exception.ShellCommandException;
 import org.poem.core.print.ShellPrint;
-import org.poem.tools.utils.collection.Lists;
 import org.poem.tools.utils.logger.LoggerUtils;
 import org.poem.tools.utils.string.StringUtils;
 import org.springframework.boot.ApplicationArguments;
