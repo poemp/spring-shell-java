@@ -71,11 +71,11 @@ public class CommandShellRunner implements Runner {
                     executor(parse.getCurrentMethod(), args);
                 } catch (ParseException e) {
                     //参数转换异常
-                    LoggerUtils.error(e);
+                    LoggerUtils.error(e.getMessage(),e);
                     ShellPrint.printMsg(e.getMessage());
                 } catch (ShellCommandException e) {
                     //输入的命令异常
-                    LoggerUtils.error(e);
+                    LoggerUtils.error(e.getMessage(),e);
                     ShellPrint.printMsg(e.getMessage());
                 }catch (Exception e){
                     //调用的方法中出现异常
@@ -115,12 +115,14 @@ public class CommandShellRunner implements Runner {
      *
      * @return
      */
-    private Boolean getMethodList(String command) {
-        for (List<ShellMethodTarget> shellMethodTargets : commands.values()) {
-            for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
-                if (shellMethodTarget.getName().equals(command)) {
-                    return true;
-                }
+    private Boolean getMethodList (String groupName String command) {
+        List<ShellMethodTarget> shellMethodTargets = this.commands.get(groupName);
+        if(CollectionUtils.isEmpty(shellMethodTargets)){
+            return false;
+        }
+        for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
+              if (shellMethodTarget.getName().equals(command)) {
+                return true;
             }
         }
         return false;
@@ -142,7 +144,7 @@ public class CommandShellRunner implements Runner {
                 throw new ShellCommandException("[" + groupName + "] 不是内部命令.");
             }
         }
-        if (StringUtils.isEmpty(command) || !getMethodList(command)) {
+        if (StringUtils.isEmpty(command) || !getMethodList(groupName,command)) {
             if (!ActionEnums.HELP.equals(groupName.toUpperCase())) {
                 throw new ShellCommandException("[" + groupName + " " + command + "]不是内部命令.");
             }
