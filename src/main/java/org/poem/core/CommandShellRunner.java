@@ -151,7 +151,7 @@ public class CommandShellRunner implements Runner {
         }
         if(StringUtils.isEmpty(command)){
             ShellPrint.printTargetMethod(groupName, commands.get(groupName));
-            return false;
+            return ActionEnums.HELP.equals(groupName.toUpperCase());
         }else{
             if (!containsMethod(commands.get(groupName),command) || !ActionEnums.HELP.equals(command.toUpperCase())) {
                 ShellPrint.printTargetMethod(groupName, commands.get(groupName));
