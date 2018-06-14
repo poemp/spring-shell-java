@@ -136,7 +136,7 @@ public class CommandShellRunner implements Runner {
      * @return
      * @throws ShellCommandException
      */
-    private void validate(String commandLine) throws ShellCommandException {
+    private boolean validate(String commandLine) throws ShellCommandException {
         String groupName = getGroupName(commandLine);
         String command = getCommand(commandLine);
         //分组名称不正确
@@ -154,8 +154,8 @@ public class CommandShellRunner implements Runner {
             return false;
         }else{
             if (!containsMethod(commands.get(groupName),command) || !ActionEnums.HELP.equals(command.toUpperCase())) {
-                throw new ShellCommandException("[" + groupName + " " + command + "]不是内部命令.");
                 ShellPrint.printTargetMethod(groupName, commands.get(groupName));
+                throw new ShellCommandException("[" + groupName + " " + command + "]不是内部命令.");
             }
         }
         return true;
