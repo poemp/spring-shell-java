@@ -140,18 +140,42 @@ public class CommandShellRunner implements Runner {
         String groupName = getGroupName(commandLine);
         String command = getCommand(commandLine);
         //分组名称不正确
-        if (StringUtils.isEmpty(groupName) || !commands.keySet().contains(groupName)) {
-            if (!ActionEnums.HELP.equals(groupName.toUpperCase())) {
-                throw new ShellCommandException("[" + groupName + "] 不是内部命令.");
+        if(StringUtils.isEmpty(groupName)){
+            LoggerUtils.warn("No Group");
+        }else{
+            if (!commands.keySet().contains(groupName)) {
+                if (!ActionEnums.HELP.equals(groupName.toUpperCase())) {
+                    throw new ShellCommandException("[" + groupName + "] 不是内部命令.");
+                }
             }
         }
-        if (StringUtils.isEmpty(command) || !getMethodList(groupName,command)) {
-            if (!ActionEnums.HELP.equals(groupName.toUpperCase())) {
+        if(StringUtils.isEmpty(command)){
+            ShellPrint.printTargetMethod(groupName, commands.get(groupName));
+            return false;
+        }else{
+            if (!containsMethod(commands.get(groupName),command) || !ActionEnums.HELP.equals(command.toUpperCase())) {
                 throw new ShellCommandException("[" + groupName + " " + command + "]不是内部命令.");
+                ShellPrint.printTargetMethod(groupName, commands.get(groupName));
             }
         }
+        return true;
     }
 
+    /**
+     * 方法是否正确,是否正确
+     * @param shellMethodTargets
+     * @param method
+     * @return
+     */
+    private  static boolean containsMethod(List<ShellMethodTarget> shellMethodTargets,String method){
+        boolean contains = false;
+        for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
+            if(shellMethodTarget.getName().equals(method)){
+                contains = true;
+            }
+        }
+        return contains;
+    }
     /**
      * 获取当前的分组
      *
