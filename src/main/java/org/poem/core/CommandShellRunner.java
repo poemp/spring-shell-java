@@ -116,7 +116,7 @@ public class CommandShellRunner implements Runner {
      *
      * @return
      */
-    private Boolean getMethodList (String groupName String command) {
+    private Boolean getMethodList (String groupName , String command) {
         List<ShellMethodTarget> shellMethodTargets = this.commands.get(groupName);
         if(CollectionUtils.isEmpty(shellMethodTargets)){
             return false;
