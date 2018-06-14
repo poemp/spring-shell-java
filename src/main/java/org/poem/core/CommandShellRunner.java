@@ -65,7 +65,7 @@ public class CommandShellRunner implements Runner {
                             args = new Object[1];
                         }
                         String command = getCommand(commandLine);
-                        if(StringUtils.isNotBlank(command)){
+                        if(StringUtils.isNotBlank(command) && args.length > 0 ){
                             args[0] = command;
                         }
                         executor(parse.getCurrentMethod(), args);
