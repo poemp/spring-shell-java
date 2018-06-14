@@ -153,7 +153,7 @@ public class CommandShellRunner implements Runner {
             ShellPrint.printTargetMethod(groupName, commands.get(groupName));
             return ActionEnums.HELP.equals(groupName.toUpperCase());
         }else{
-            if (!containsMethod(commands.get(groupName),command) || !ActionEnums.HELP.equals(command.toUpperCase())) {
+            if (!containsMethod(commands.get(groupName),command) && !ActionEnums.HELP.equals(command.toUpperCase())) {
                 ShellPrint.printTargetMethod(groupName, commands.get(groupName));
                 throw new ShellCommandException("[" + groupName + " " + command + "]不是内部命令.");
             }
