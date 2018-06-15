@@ -61,12 +61,12 @@ public class CommandShellRunner implements Runner {
                     if(this.validate(commandLine)){
                         ShellCommandParse parse = new ShellCommandParse(commands.get(getGroupName(commandLine)));
                         Object[] args = parse.getParameterValue(commandLine);
-                        if(parse.getCurrentMethod().getBean().getClass().getName().equals("org.poem.core.handler.HelpHandler")){
+                        if (parse.getCurrentMethod().getBean().getClass().getName().equals("org.poem.core.handler.HelpHandler")) {
                             args = new Object[1];
-                        }
-                        String command = getCommand(commandLine);
-                        if(StringUtils.isNotBlank(command) && args.length > 0 ){
-                            args[0] = command;
+                            String command = getCommand(commandLine);
+                            if (StringUtils.isNotBlank(command)) {
+                                args[0] = command;
+                            }
                         }
                         executor(parse.getCurrentMethod(), args);
                     }
