@@ -58,24 +58,25 @@ public class CommandShellRunner implements Runner {
                     System.exit(0);
                 }
                 try {
-                    this.validate(commandLine);
-                    ShellCommandParse parse = new ShellCommandParse(commands.get(getGroupName(commandLine)));
-                    Object[] args = parse.getParameterValue(commandLine);
-                    if(parse.getCurrentMethod().getBean().getClass().getName().equals("org.poem.core.handler.HelpHandler")){
-                        args = new Object[1];
+                    if(this.validate(commandLine)){
+                        ShellCommandParse parse = new ShellCommandParse(commands.get(getGroupName(commandLine)));
+                        Object[] args = parse.getParameterValue(commandLine);
+                        if (parse.getCurrentMethod().getBean().getClass().getName().equals("org.poem.core.handler.HelpHandler")) {
+                            args = new Object[1];
+                            String command = getCommand(commandLine);
+                            if (StringUtils.isNotBlank(command)) {
+                                args[0] = command;
+                            }
+                        }
+                        executor(parse.getCurrentMethod(), args);
                     }
-                    String command = getCommand(commandLine);
-                    if(StringUtils.isNotBlank(command)){
-                        args[0] = command;
-                    }
-                    executor(parse.getCurrentMethod(), args);
                 } catch (ParseException e) {
                     //参数转换异常
-                    LoggerUtils.error(e);
+                    LoggerUtils.error(e.getMessage(),e);
                     ShellPrint.printMsg(e.getMessage());
                 } catch (ShellCommandException e) {
                     //输入的命令异常
-                    LoggerUtils.error(e);
+                    LoggerUtils.error(e.getMessage(),e);
                     ShellPrint.printMsg(e.getMessage());
                 }catch (Exception e){
                     //调用的方法中出现异常
@@ -115,12 +116,14 @@ public class CommandShellRunner implements Runner {
      *
      * @return
      */
-    private Boolean getMethodList(String command) {
-        for (List<ShellMethodTarget> shellMethodTargets : commands.values()) {
-            for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
-                if (shellMethodTarget.getName().equals(command)) {
-                    return true;
-                }
+    private Boolean getMethodList (String groupName , String command) {
+        List<ShellMethodTarget> shellMethodTargets = this.commands.get(groupName);
+        if(CollectionUtils.isEmpty(shellMethodTargets)){
+            return false;
+        }
+        for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
+              if (shellMethodTarget.getName().equals(command)) {
+                return true;
             }
         }
         return false;
@@ -133,22 +136,46 @@ public class CommandShellRunner implements Runner {
      * @return
      * @throws ShellCommandException
      */
-    private void validate(String commandLine) throws ShellCommandException {
+    private boolean validate(String commandLine) throws ShellCommandException {
         String groupName = getGroupName(commandLine);
         String command = getCommand(commandLine);
         //分组名称不正确
-        if (StringUtils.isEmpty(groupName) || !commands.keySet().contains(groupName)) {
-            if (!ActionEnums.HELP.equals(groupName.toUpperCase())) {
-                throw new ShellCommandException("[" + groupName + "] 不是内部命令.");
+        if(StringUtils.isEmpty(groupName)){
+            LoggerUtils.warn("No Group");
+        }else{
+            if (!commands.keySet().contains(groupName)) {
+                if (!ActionEnums.HELP.equals(groupName.toUpperCase())) {
+                    throw new ShellCommandException("[" + groupName + "] 不是内部命令.");
+                }
             }
         }
-        if (StringUtils.isEmpty(command) || !getMethodList(command)) {
-            if (!ActionEnums.HELP.equals(groupName.toUpperCase())) {
+        if(StringUtils.isEmpty(command)){
+            ShellPrint.printTargetMethod(groupName, commands.get(groupName));
+            return ActionEnums.HELP.equals(groupName.toUpperCase());
+        }else{
+            if (!containsMethod(commands.get(groupName),command) && !ActionEnums.HELP.equals(command.toUpperCase())) {
+                ShellPrint.printTargetMethod(groupName, commands.get(groupName));
                 throw new ShellCommandException("[" + groupName + " " + command + "]不是内部命令.");
             }
         }
+        return true;
     }
 
+    /**
+     * 方法是否正确,是否正确
+     * @param shellMethodTargets
+     * @param method
+     * @return
+     */
+    private  static boolean containsMethod(List<ShellMethodTarget> shellMethodTargets,String method){
+        boolean contains = false;
+        for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
+            if(shellMethodTarget.getName().equals(method)){
+                contains = true;
+            }
+        }
+        return contains;
+    }
     /**
      * 获取当前的分组
      *

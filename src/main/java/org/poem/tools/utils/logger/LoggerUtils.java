@@ -110,7 +110,7 @@ public final class LoggerUtils {
      */
     public static void error(String error) {
         if (logger.isErrorEnabled()) {
-            logger.info(String.format("%s|%s|%d|error:%s", getClassName(), getMethod(), getLineNumber(), error));
+            logger.error(String.format("%s|%s|%d|error:%s", getClassName(), getMethod(), getLineNumber(), error));
         }
     }
 
@@ -121,7 +121,7 @@ public final class LoggerUtils {
      */
     public static void error(Exception error) {
         if (logger.isErrorEnabled()) {
-            logger.info(String.format("%s|%s|%d|error:%s", getClassName(), getMethod(), getLineNumber(), error.toString()));
+            logger.error(String.format("%s|%s|%d|error:%s", getClassName(), getMethod(), getLineNumber(), error.toString()));
         }
     }
 
@@ -132,7 +132,7 @@ public final class LoggerUtils {
      */
     public static void error(String error, Object... objects) {
         if (logger.isErrorEnabled()) {
-            logger.info(String.format("%s|%s|%d|error:%s", getClassName(), getMethod(), getLineNumber(), error), objects);
+            logger.error(String.format("%s|%s|%d|error:%s", getClassName(), getMethod(), getLineNumber(), error), objects);
         }
     }
 
@@ -143,7 +143,7 @@ public final class LoggerUtils {
      */
     public static void error(String error, Object object) {
         if (logger.isErrorEnabled()) {
-            logger.info(String.format("%s|%s|%d|error:%s", getClassName(), getMethod(), getLineNumber(), error), object);
+            logger.error(String.format("%s|%s|%d|error:%s", getClassName(), getMethod(), getLineNumber(), error), object);
         }
     }
 
@@ -155,7 +155,7 @@ public final class LoggerUtils {
      */
     public static void error(String error, Throwable throwable) {
         if (logger.isErrorEnabled()) {
-            logger.info(String.format("%s|%s|%d|error:%s", getClassName(), getMethod(), getLineNumber(), error), throwable);
+            logger.error(String.format("%s|%s|%d|error:%s", getClassName(), getMethod(), getLineNumber(), error), throwable);
         }
     }
 
@@ -166,7 +166,7 @@ public final class LoggerUtils {
      */
     public static void debug(String debug) {
         if (logger.isDebugEnabled()) {
-            logger.info(String.format("%s|%s|%d|debug:%s", getClassName(), getMethod(), getLineNumber(), debug));
+            logger.debug(String.format("%s|%s|%d|debug:%s", getClassName(), getMethod(), getLineNumber(), debug));
         }
     }
 
@@ -177,7 +177,7 @@ public final class LoggerUtils {
      */
     public static void debug(String debug, Throwable throwable) {
         if (logger.isDebugEnabled()) {
-            logger.info(String.format("%s|%s|%d|debug:%s", getClassName(), getMethod(), getLineNumber(), debug), throwable);
+            logger.debug(String.format("%s|%s|%d|debug:%s", getClassName(), getMethod(), getLineNumber(), debug), throwable);
         }
     }
 
@@ -188,7 +188,7 @@ public final class LoggerUtils {
      */
     public static void debug(String debug, Object... objects) {
         if (logger.isDebugEnabled()) {
-            logger.info(String.format("%s|%s|%d|debug:%s", getClassName(), getMethod(), getLineNumber(), debug), objects);
+            logger.debug(String.format("%s|%s|%d|debug:%s", getClassName(), getMethod(), getLineNumber(), debug), objects);
         }
     }
 
@@ -199,7 +199,7 @@ public final class LoggerUtils {
      */
     public static void debug(String debug, Object object) {
         if (logger.isDebugEnabled()) {
-            logger.info(String.format("%s|%s|%d|debug:%s", getClassName(), getMethod(), getLineNumber(), debug), object);
+            logger.debug(String.format("%s|%s|%d|debug:%s", getClassName(), getMethod(), getLineNumber(), debug), object);
         }
     }
 
