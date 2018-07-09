@@ -50,7 +50,7 @@ public class CommandShellRunner implements Runner {
         PrintWriter pw = new PrintWriter(System.out);
         ShellPrint.printFirstMessage();
         while (true) {
-            pw.print("\n输入>:");
+            pw.print("\nInput>:");
             pw.flush();
             String commandLine = sc.nextLine();  //读取字符串型输入
             if (StringUtils.isNotBlank(commandLine)) {

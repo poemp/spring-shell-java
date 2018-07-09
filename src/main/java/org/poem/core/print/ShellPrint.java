@@ -92,6 +92,7 @@ public class ShellPrint {
         StringBuilder stringBuilder = new StringBuilder();
         if (null != shellMethodTargets) {
             for (ShellMethodTarget shellMethodTarget : shellMethodTargets) {
+                //不显示内部的方法
                 if(ActionEnums.HELP.getAction().equalsIgnoreCase(group)){
                     continue;
                 }
