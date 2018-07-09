@@ -82,7 +82,9 @@ public class ShellMethodTargetRegistrar {
                     Class[] paramClazzs = method.getParameterTypes();
                     if (param.length != paramClazzs.length && annotateds.length != paramClazzs.length) {
                         try {
-                            throw new ShellParameterException("每个参数都需要加上@ShellOptions注解");
+                            throw new ShellParameterException(
+                                    String.format("Illegal registration for command '%s': All Paramter Must Has Option:@ShellOptions", name)
+                            );
                         } catch (ShellParameterException e) {
                             LoggerUtils.error(e.getMessage());
                             e.printStackTrace();
