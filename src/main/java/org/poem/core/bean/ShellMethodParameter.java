@@ -1,6 +1,9 @@
 package org.poem.core.bean;
 
 
+/**
+ * @author poem
+ */
 public class ShellMethodParameter {
 
     /**

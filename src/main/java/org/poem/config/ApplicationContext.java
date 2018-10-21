@@ -7,10 +7,13 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author poem
+ */
 @Service
 public class ApplicationContext implements ApplicationContextAware, ApplicationListener {
 
-    private static org.springframework.context.ApplicationContext applicationContext;
+    private static org.springframework.context.ApplicationContext applicationContext = null;
 
     /**
      * 获取bean
@@ -24,7 +27,7 @@ public class ApplicationContext implements ApplicationContextAware, ApplicationL
 
     @Override
     public void setApplicationContext(org.springframework.context.ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+        ApplicationContext.applicationContext = applicationContext;
     }
 
 

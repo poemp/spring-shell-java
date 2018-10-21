@@ -24,6 +24,7 @@ import java.util.Map;
 
 /**
  * 方法注册
+ * @author poem
  */
 public class ShellMethodTargetRegistrar {
 
